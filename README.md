@@ -4,6 +4,13 @@ the func `get_cpu_frequency` took from https://docs.rs/crate/sysinfo/0.19.2/sour
 mainly for debugging and verify that delta 0.10.x slowdown problem is caused by `sysinfo` crate
 see https://github.com/dandavison/delta/issues/839
 
+## usage
+
+```shell
+get-cpu-frequency-slow [your_machine_logic_CPU_num]
+```
+
+## demo result
 
 test env:
 
@@ -19,7 +26,17 @@ GPU: NVIDIA GeForce GTX 1060 3GB
 Memory: 6747MiB / 32038MiB
 ```
 
-demo result:
+a single run will cost about `16ms`, thus 16 core CPU result in about `256ms`
+
+```
+./target/release/get-cpu-frequency-slow 1
+num_cpu=1
+total time elapsed in get_cpu_frequency()x1 is: 15.934353ms
+./target/release/get-cpu-frequency-slow
+num_cpu=16
+total time elapsed in get_cpu_frequency()x16 is: 252.667394ms
+```
+
 
 most of the time it will look like this:
 
