@@ -40,7 +40,7 @@ total time elapsed in get_cpu_frequency() is: 265.281557ms
 total time elapsed in get_cpu_frequency() is: 264.696121ms
 ```
 
-but there's also rarely condition result in very good result, like this:
+but there's also **rarely** result in very low latency result, like this:
 
 ```
 ❯ make run
