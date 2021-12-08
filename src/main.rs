@@ -1,21 +1,31 @@
 use std::fs::File;
 use std::io::Read;
 use std::time::Instant;
+use std::env;
+
+const DEFAULT_CPU_NUM: i32 = 16;
 
 fn main() {
-    // change this to your logic CPU core number
-    const NUM_CPU: usize = 16;
+    env::args().last().unwrap_or_default();
+    // your logic CPU core number
+    let num_cpu = if let Some(num_cpu) = env::args().last() {
+        num_cpu.parse::<i32>().unwrap_or(DEFAULT_CPU_NUM)
+    } else {
+        DEFAULT_CPU_NUM
+    };
+
+    println!("num_cpu={}", num_cpu);
 
     let start = Instant::now();
 
     // this for loop simulate the logic in `refresh_processors()`
     // see https://github.com/GuillaumeGomez/sysinfo/blob/01218743c7e656b7f12f530713ba417d2c5940ad/src/linux/system.rs#L146
-    for i in 0..NUM_CPU {
-        get_cpu_frequency(i);
+    for i in 0..num_cpu {
+        get_cpu_frequency(i as usize);
     }
 
     let duration = start.elapsed();
-    println!("total time elapsed in get_cpu_frequency() is: {:?}", duration);
+    println!("total time elapsed in get_cpu_frequency()x{} is: {:?}", num_cpu, duration);
 }
 
 // the func `get_cpu_frequency` took from https://docs.rs/crate/sysinfo/0.19.2/source/src/linux/processor.rs
