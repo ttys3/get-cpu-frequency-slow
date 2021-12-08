@@ -3,10 +3,17 @@ use std::io::Read;
 use std::time::Instant;
 
 fn main() {
+    // change this to your logic CPU core number
+    const NUM_CPU: usize = 16;
+
     let start = Instant::now();
-    for i in 0..16 {
+
+    // this for loop simulate the logic in `refresh_processors()`
+    // see https://github.com/GuillaumeGomez/sysinfo/blob/01218743c7e656b7f12f530713ba417d2c5940ad/src/linux/system.rs#L146
+    for i in 0..NUM_CPU {
         get_cpu_frequency(i);
     }
+
     let duration = start.elapsed();
     println!("total time elapsed in get_cpu_frequency() is: {:?}", duration);
 }
