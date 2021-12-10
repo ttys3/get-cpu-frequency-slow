@@ -8,6 +8,9 @@ see https://github.com/dandavison/delta/issues/839
 
 ```shell
 get-cpu-frequency-slow [your_machine_logic_CPU_num]
+
+# or force only read /proc/cpuinfo
+get-cpu-frequency-slow [your_machine_logic_CPU_num] true
 ```
 
 ## demo result
@@ -67,7 +70,7 @@ total time elapsed in get_cpu_frequency() is: 275.174µs
 
 ## Important notice
 
-please note that directly read /proc/cpuinfo is rather fast.
+please note that directly read `/proc/cpuinfo` is rather fast.
 
 this program is only used to demonstrate the slowdown problem when reading `/sys/devices/system/cpu/cpu{}/cpufreq/scaling_cur_freq`
 
