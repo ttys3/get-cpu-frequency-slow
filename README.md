@@ -64,3 +64,22 @@ but there's also **rarely** result in very low latency result, like this:
 ./target/release/get-cpu-frequency-slow
 total time elapsed in get_cpu_frequency() is: 275.174µs
 ```
+
+## Important notice
+
+please note that directly read /proc/cpuinfo is rather fast.
+
+this program is only used to demonstrate the slowdown problem when reading `/sys/devices/system/cpu/cpu{}/cpufreq/scaling_cur_freq`
+
+```shell
+# with read /sys/devices/system/cpu/cpu{}/cpufreq/scaling_cur_freq
+❯ ./target/release/get-cpu-frequency-slow 16
+num_cpu=16 force_cpuinfo=false
+total time elapsed in get_cpu_frequency()x16 is: 281.183772ms
+
+# directly read /proc/cpuinfo
+❯ ./target/release/get-cpu-frequency-slow 16 true
+num_cpu=16 force_cpuinfo=true
+skip readding cpu freq from sysfs, directly to /proc/cpuinfo
+total time elapsed in get_cpu_frequency()x16 is: 2.989249ms
+```
