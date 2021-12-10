@@ -6,4 +6,5 @@ static:
 
 run:
 	./target/release/get-cpu-frequency-slow 1
+	sleep 1
 	./target/release/get-cpu-frequency-slow
